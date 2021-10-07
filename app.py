@@ -5,20 +5,23 @@ class CreditCard:
 	@classmethod
 	def get_card(self, card):
 		return self(card)
-		
+
+	@property
 	def get_vendor(self):
 		vendor =None
 		crn =str(self.card_no)
-		if crn.startswith('5'):
+		if crn.startswith('4'):
 			vendor ='Visa Card' 
-		elif crn.startswith(('57', '68', '73')):
+		elif crn.startswith(('50', '67', '58', '63')):
 			vendor ='Maestro Card'
-		elif crn.startswith('50'):
+		elif crn.startswith('5'):
 			vendor ='Master Card'
-		elif crn.startswith('7'):
+		elif crn.startswith('37'):
 			vendor ='American Express'
-		elif crn.startswith('43'):
+		elif crn.startswith('68'):
 			vendor ='UnionPay Card'
+		elif crn.startswith('7'):
+			vendor ='Gasoline Card'
 
 		return vendor
 	
