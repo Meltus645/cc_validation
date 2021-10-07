@@ -3,6 +3,9 @@ class CreditCard:
 		self.card_no =card_no
 
 	@classmethod
+	def get_card(self, card):
+		return self(card)
+		
 	def get_vendor(self):
 		vendor =None
 		crn =str(self.card_no)
