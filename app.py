@@ -24,15 +24,27 @@ class CreditCard:
 			vendor ='Gasoline Card'
 
 		return vendor
+
+	def card_len(self):
+		flag ='L101'
+		if 13 <= self.card_no <=19:
+			flag ='L201'
+		return flag
 	
 if __name__ == '__main__':
 	print("[+] Enter card number: ", end ='')
 	card_no =int(input())
-	ccv =CreditCard(card_no)
-	vendor =ccv.get_vendor()
-	print(f"[+] Card Number: {card_no}")
-	if vendor:
-		print(f"[+] Card Vendor: {vendor}")
+	crc =CreditCard.set_card(card_no)
+	vendor =crc.get_vendor
+	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
+	if vendor: # card vendor check -cvc
+		print("[+] cvc: pass")
 
 	else:
-		print(f"[-] Unknown card vendor!")
+		print("[-] cvc: fail")
+
+	len_test =crc.card_len()
+	if len_test =='L201': # card length check -clc
+		print("[+] clc: pass")
+	else:
+		print("[-] clc: fail")
