@@ -4,12 +4,12 @@ class CreditCard:
 
 	@classmethod
 	def set_card(self, card):
-		return self(card)
+		return self(str(card))
 
 	@property
 	def get_vendor(self):
 		vendor =None
-		crn =str(self.card_no)
+		crn =self.card_no
 		if crn.startswith('4'):
 			vendor ='Visa Card' 
 		elif crn.startswith(('50', '67', '58', '63')):
@@ -45,12 +45,15 @@ class CreditCard:
 		if sum_ %10 ==0:
 			isvalid =True
 		return isvalid
+	def check_sum(self):
+		return self.card_no[-4:]
 if __name__ == '__main__': 
 	print("[+] Enter card number: ", end ='')
 	card_no =input()
 	crc =CreditCard.set_card(card_no)
 	vendor =crc.get_vendor
 	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
+	print(f"[+] ccs: {crc.check_sum()}") # card checksum -ccs
 	if vendor: # card vendor check -cvc
 		print("[+] cvc: pass")
 
