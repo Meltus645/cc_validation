@@ -1,5 +1,6 @@
 import time
 import os
+import sys
 from colorama import Fore, Back, Style
 class CreditCard:
 	def __init__(self, card_no):
@@ -73,9 +74,24 @@ if __name__ == '__main__':
 	crc =CreditCard.set_card(card_no)
 	clrscn()
 	print(Fore.GREEN+"[+] Determining your input ...")
-
+	if crc.cardlen <=0:
+		print(Fore.RED+"[-] Input not found")
+		time.sleep(1)
+		print(Fore.RED+"[-] Closing ...")
+		print(Style.RESET_ALL)
+		time.sleep(1)
+		sys.exit(0)
 	time.sleep(1)
-	print(Fore.YELLOW+"==========RESULTS==========")
+	print("[+] validating ....")
+	for i in range(100):
+		time.sleep(33/99)
+		sys.stdout.write(f"\r {i}% complete")
+		sys.stdout.flush()
+	clrscn()
+	print(Fore.GREEN+"[+] Complete")
+	time.sleep(1)
+	clrscn()
+	print(Fore.YELLOW+"==========Test Pass==========")
 	print("\n")
 	time.sleep(1)
 	vendor =crc.get_vendor
