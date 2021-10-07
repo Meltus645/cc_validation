@@ -3,8 +3,9 @@ import os
 from colorama import Fore, Back, Style
 class CreditCard:
 	def __init__(self, card_no):
-		self.card_no =card_no
+		self.card_no =card_no.strip()
 		self.checksum_size =0;
+		self.cardlen =len(self.card_no)
 
 	@classmethod
 	def set_card(self, card):
@@ -37,7 +38,7 @@ class CreditCard:
 
 	def card_len(self):
 		flag ='L101'
-		if 13 <= int(self.card_no) <=19:
+		if 13 <= self.cardlen <=19:
 			flag ='L201'
 		return flag
 
@@ -71,6 +72,9 @@ if __name__ == '__main__':
 	card_no =input()
 	crc =CreditCard.set_card(card_no)
 	clrscn()
+	print(Fore.GREEN+"[+] Determining your input ...")
+
+	time.sleep(1)
 	print(Fore.YELLOW+"==========RESULTS==========")
 	print("\n")
 	time.sleep(1)
