@@ -62,3 +62,9 @@ if __name__ == '__main__':
 		print("[+] clc: pass")
 	else:
 		print("[-] clc: fail")
+
+	isvalid =crc.validate()
+	if isvalid: # card boolean check -cbc
+		print("[+] cbc: pass")
+	else:
+		print("[-] cbc: fail")
