@@ -1,6 +1,7 @@
 class CreditCard:
 	def __init__(self, card_no):
 		self.card_no =card_no
+		self.checksum_size =0;
 
 	@classmethod
 	def set_card(self, card):
@@ -11,17 +12,23 @@ class CreditCard:
 		vendor =None
 		crn =self.card_no
 		if crn.startswith('4'):
-			vendor ='Visa Card' 
+			vendor ='Visa Card'
+			self.checksum_size =3 
 		elif crn.startswith(('50', '67', '58', '63')):
 			vendor ='Maestro Card'
+			self.checksum_size =2
 		elif crn.startswith('5'):
 			vendor ='Master Card'
+			self.checksum_size =4
 		elif crn.startswith('37'):
 			vendor ='American Express'
+			self.checksum_size =3
 		elif crn.startswith('68'):
 			vendor ='UnionPay Card'
+			self.checksum_size = 2
 		elif crn.startswith('7'):
 			vendor ='Gasoline Card'
+			self.checksum_size =4
 
 		return vendor
 
@@ -46,7 +53,7 @@ class CreditCard:
 			isvalid =True
 		return isvalid
 	def check_sum(self):
-		return self.card_no[-4:]
+		return self.card_no[-self.checksum_size:]
 if __name__ == '__main__': 
 	print("[+] Enter card number: ", end ='')
 	card_no =input()
