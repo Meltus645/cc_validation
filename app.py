@@ -27,13 +27,27 @@ class CreditCard:
 
 	def card_len(self):
 		flag ='L101'
-		if 13 <= self.card_no <=19:
+		if 13 <= int(self.card_no) <=19:
 			flag ='L201'
 		return flag
-	
-if __name__ == '__main__':
+
+	def validate(self):
+		isvalid =False
+		sum_ =0
+		ccno =self.card_no[::-1] # 1. reverse card_no elements and store in ccno
+		for i in range(len(ccno)): 
+			if i %2 ==1:
+				ix2 =int(ccno[i])*2 # 2. double every second number of ccno
+				if len(str(ix2)) ==2: # check if ix2 gives a 2-digit number
+					sum_ +=sum([int(x) for x in str(ix2)]) # if true add the digits, list comprehension used
+				else:
+					sum_ +=ix2
+		if sum_ %10 ==0:
+			isvalid =True
+		return isvalid
+if __name__ == '__main__': 
 	print("[+] Enter card number: ", end ='')
-	card_no =int(input())
+	card_no =input()
 	crc =CreditCard.set_card(card_no)
 	vendor =crc.get_vendor
 	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
