@@ -1,5 +1,6 @@
 import time
 import os
+from colorama import Fore, Back, Style
 class CreditCard:
 	def __init__(self, card_no):
 		self.card_no =card_no
@@ -55,42 +56,49 @@ class CreditCard:
 			isvalid =True
 		return isvalid
 	def check_sum(self):
-		return self.card_no[-self.checksum_size:]
+		return int(self.card_no[-self.checksum_size:])
 
-	def clrscn(self):
-		if os.name =='posix': # mac, linux
-			_=os.system('clear')
+def clrscn():
+	if os.name =='posix': # mac, linux
+		_=os.system('clear')
 
-		else: # windows
-			_=os.system('cls')
+	else: # windows
+		_=os.system('cls')
 
-if __name__ == '__main__': 
-	print("[+] Enter card number: ", end ='')
+if __name__ == '__main__':
+	clrscn() 
+	print(Fore.GREEN+"[+] Enter card number: ", end ='')
 	card_no =input()
 	crc =CreditCard.set_card(card_no)
-	crc.clrscn()
+	clrscn()
+	print(Fore.YELLOW+"==========RESULTS==========")
+	print("\n")
 	time.sleep(1)
 	vendor =crc.get_vendor
-	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
+	print(f"{Fore.GREEN}[+] ccn: {crc.card_no}") # credit card number -ccn
 	time.sleep(1)
-	print(f"[+] ccs: {crc.check_sum()}") # card checksum -ccs
+	if crc.check_sum() >0: # card checksum -ccs
+		print(f"{Fore.GREEN}[+] ccs: {crc.check_sum()}") 
+	else:
+		print(f"{Fore.RED}[-] ccs: fail")
 	time.sleep(1)
 	if vendor: # card vendor check -cvc
-		print("[+] cvc: pass")
+		print(Fore.GREEN+"[+] cvc: pass")
 
 	else:
-		print("[-] cvc: fail")
+		print(Fore.RED+"[-] cvc: fail")
 
 	time.sleep(1)
 	len_test =crc.card_len()
 	if len_test =='L201': # card length check -clc
-		print("[+] clc: pass")
+		print(Fore.GREEN+"[+] clc: pass")
 	else:
-		print("[-] clc: fail")
+		print(Fore.RED+"[-] clc: fail")
 
 	time.sleep(1)
 	isvalid =crc.validate()
 	if isvalid: # card boolean check -cbc
-		print("[+] cbc: pass")
+		print(Fore.GREEN+"[+] cbc: pass")
 	else:
-		print("[-] cbc: fail")
+		print(Fore.RED+"[-] cbc: fail")
+	print(Style.RESET_ALL)
