@@ -3,7 +3,7 @@ class CreditCard:
 		self.card_no =card_no
 
 	@classmethod
-	def get_card(self, card):
+	def set_card(self, card):
 		return self(card)
 
 	@property
