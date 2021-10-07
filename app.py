@@ -2,6 +2,7 @@ import time
 import os
 import sys
 from colorama import Fore, Back, Style
+import random
 class CreditCard:
 	def __init__(self, card_no):
 		self.card_no =card_no.strip()
@@ -66,6 +67,11 @@ def clrscn():
 
 	else: # windows
 		_=os.system('cls')
+def progress(curr):
+	step =random.randint(0, 5)
+	if curr + step >100:
+		step =0
+	return step
 
 if __name__ == '__main__':
 	clrscn() 
@@ -83,10 +89,13 @@ if __name__ == '__main__':
 		sys.exit(0)
 	time.sleep(1)
 	print("[+] validating ....")
-	for i in range(100):
+	i =0
+	while i<100:
+
 		time.sleep(33/99)
 		sys.stdout.write(f"\r {i}% complete")
 		sys.stdout.flush()
+		i =i+progress(i)
 	clrscn()
 	print(Fore.GREEN+"[+] Complete")
 	time.sleep(1)
