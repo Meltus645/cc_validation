@@ -1,7 +1,7 @@
 import time
 import os
 import sys
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style,init
 import random
 class CreditCard:
 	def __init__(self, card_no):
