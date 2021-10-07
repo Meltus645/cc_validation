@@ -1,4 +1,5 @@
 import time
+import os
 class CreditCard:
 	def __init__(self, card_no):
 		self.card_no =card_no
@@ -55,12 +56,21 @@ class CreditCard:
 		return isvalid
 	def check_sum(self):
 		return self.card_no[-self.checksum_size:]
+
+	def clrscn(self):
+		if os.name =='posix': # mac, linux
+			_=os.system('clear')
+
+		else: # windows
+			_=os.system('cls')
+
 if __name__ == '__main__': 
 	print("[+] Enter card number: ", end ='')
 	card_no =input()
 	crc =CreditCard.set_card(card_no)
-	vendor =crc.get_vendor
+	crc.clrscn()
 	time.sleep(1)
+	vendor =crc.get_vendor
 	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
 	time.sleep(1)
 	print(f"[+] ccs: {crc.check_sum()}") # card checksum -ccs
@@ -77,7 +87,7 @@ if __name__ == '__main__':
 		print("[+] clc: pass")
 	else:
 		print("[-] clc: fail")
-	
+
 	time.sleep(1)
 	isvalid =crc.validate()
 	if isvalid: # card boolean check -cbc
