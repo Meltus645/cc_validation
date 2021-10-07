@@ -74,6 +74,7 @@ def progress(curr):
 	return step
 
 if __name__ == '__main__':
+	init()
 	clrscn() 
 	print(Fore.GREEN+"[+] Enter card number: ", end ='')
 	card_no =input()
@@ -88,46 +89,48 @@ if __name__ == '__main__':
 		time.sleep(1)
 		sys.exit(0)
 	time.sleep(1)
-	print("[+] validating ....")
+	clrscn()
 	i =0
 	while i<100:
-
-		time.sleep(33/99)
-		sys.stdout.write(f"\r {i}% complete")
+		sys.stdout.write(f"\r[+] Validating Card.... {i}% Complete")
 		sys.stdout.flush()
 		i =i+progress(i)
+		time.sleep(33/99)
 	clrscn()
+	time.sleep(33/99)
 	print(Fore.GREEN+"[+] Complete")
 	time.sleep(1)
 	clrscn()
-	print(Fore.YELLOW+"==========Test Pass==========")
+	print(Fore.GREEN+"[+] Generating Report")
+	time.sleep(2)
+	clrscn()
+	print(Fore.YELLOW+"==========Validation Report==========")
 	print("\n")
 	time.sleep(1)
 	vendor =crc.get_vendor
-	print(f"{Fore.GREEN}[+] ccn: {crc.card_no}") # credit card number -ccn
-	time.sleep(1)
-	if crc.check_sum() >0: # card checksum -ccs
-		print(f"{Fore.GREEN}[+] ccs: {crc.check_sum()}") 
-	else:
-		print(f"{Fore.RED}[-] ccs: fail")
+	print(f"{Fore.GREEN}[+] Credit Number: {crc.card_no}") # credit card number -ccn
 	time.sleep(1)
 	if vendor: # card vendor check -cvc
-		print(Fore.GREEN+"[+] cvc: pass")
+		print(f"{Fore.GREEN}[+] Vendor check: Pass - {vendor}")
 
 	else:
-		print(Fore.RED+"[-] cvc: fail")
-
+		print(f"{Fore.RED}[-] Vendor check: Fail -Unknown")
+	time.sleep(1)
+	if crc.check_sum() >0: # card checksum -ccs
+		print(f"{Fore.GREEN}[+] Checksum check: Pass - {crc.check_sum()}") 
+	else:
+		print(f"{Fore.RED}[-] Checksum check: Fail - Unknown")
 	time.sleep(1)
 	len_test =crc.card_len()
 	if len_test =='L201': # card length check -clc
-		print(Fore.GREEN+"[+] clc: pass")
+		print(f"{Fore.GREEN}[+] Size Check: Pass - {len(crc.card_no)} digits")
 	else:
-		print(Fore.RED+"[-] clc: fail")
+		print(f"{Fore.RED}[-] clc: Fail - {len(crc.card_no)} digits")
 
 	time.sleep(1)
 	isvalid =crc.validate()
 	if isvalid: # card boolean check -cbc
-		print(Fore.GREEN+"[+] cbc: pass")
+		print(Fore.GREEN+"[+] Algo Check: Pass - Valid Card")
 	else:
-		print(Fore.RED+"[-] cbc: fail")
+		print(Fore.RED+"[-] Algo Check: Fail - Invalid Card")
 	print(Style.RESET_ALL)
