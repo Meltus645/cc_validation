@@ -8,3 +8,7 @@
 	<li>implements a simple boolean check</li>
 </ul>
 <p> and returns the corresponding flags</p>
+
+<h3 align ="center">Sample Output Screen</h3>
+
+<p align="center"><img src="report.png" alt="output Screen"></p>
