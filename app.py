@@ -1,3 +1,4 @@
+import time
 class CreditCard:
 	def __init__(self, card_no):
 		self.card_no =card_no
@@ -59,20 +60,25 @@ if __name__ == '__main__':
 	card_no =input()
 	crc =CreditCard.set_card(card_no)
 	vendor =crc.get_vendor
+	time.sleep(1)
 	print(f"[+] ccn: {crc.card_no}") # credit card number -ccn
+	time.sleep(1)
 	print(f"[+] ccs: {crc.check_sum()}") # card checksum -ccs
+	time.sleep(1)
 	if vendor: # card vendor check -cvc
 		print("[+] cvc: pass")
 
 	else:
 		print("[-] cvc: fail")
 
+	time.sleep(1)
 	len_test =crc.card_len()
 	if len_test =='L201': # card length check -clc
 		print("[+] clc: pass")
 	else:
 		print("[-] clc: fail")
-
+	
+	time.sleep(1)
 	isvalid =crc.validate()
 	if isvalid: # card boolean check -cbc
 		print("[+] cbc: pass")
